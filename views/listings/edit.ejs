@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate") %>
+<head>
+    <title>Edit Listing</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data" action="/listings/<%= listing.id %>?_method=PUT">
+    <h1 style="background-color:#191970;color:#ffffff;text-align:center;padding:1rem" class="mb-4">Edit Your Listing</h1>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="mb-4">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control">
+            </div>
+            <div class="mb-4">
+                <label for="description" class="form-label">Your Description</label>
+                <textarea name="listing[description]" rows="3" class="form-control"><%= listing.description %></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label for="image" class="form-label">Upload an Image</label>
+                <input type="file" name="image" accept="image/jpeg, image/jpg, image/png" value="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="form-control">  
+            </div>
+            <div class="mb-4">
+                <label for="image" class="form-label">Approx. Price </label>
+                <input type="text" name="listing[price]" value="<%= listing.price %>" class="form-control">
+            </div>
+            <div class="mb-4">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control">
+            </div>
+        
+            <div class="mb-4">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control">   
+            </div>
+            <div class="mb-5">
+                <button style="background-color:#191970;color:#ffffff" class="btn btn-dark">EDIT</button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Listing</title>
+</head>
+<body>
+<form method="post" action="/listings/<%= listing.id %>?_method=PUT">
+    <h1>Edit Your Listing</h1>
+    <input type="text" name="listing[title]" value="<%= listing.title %>">
+    <br/><br/>
+    <textarea name="listing[description]"><%= listing.description %></textarea>
+    <br/><br/>
+
+    <input type="text" name="listing[image]" value="<%= listing.image %>">
+    <br/><br/>
+    <input type="text" name="listing[price]" value="<%= listing.price %>">
+    <br/><br/>
+    <input type="text" name="listing[location]" value="<%= listing.location %>">
+    <br/><br/>
+    <input type="text" name="listing[country]" value="<%= listing.country %>">
+    <br/><br/>
+    <button>Edit</button>
+</form>
+</body>
+</html> -->

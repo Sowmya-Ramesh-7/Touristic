@@ -1,0 +1,98 @@
+body{
+    font-family: Montserrat,sans-serif;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content{
+    flex:1;
+}
+
+/* navbar */
+.navbar{
+    height: 5rem;
+}
+
+.nav-link{
+    font-size: 1.05rem;
+    color:#222222 !important;
+    font-weight: 400;
+}
+
+.search-btn{
+    color: #191970;
+}
+.search-btn:hover{
+    background-color: #191970;
+}
+/* cards */
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+    border-radius: 1rem !important
+} 
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important; 
+} 
+
+.card-body{
+    padding:0.25 rem !important;
+}
+
+
+.listing-link{
+    text-decoration: none;
+}
+/* card effect */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: #ffffff;
+}
+/* footer */
+.f-info{
+    text-align: center;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #191970;
+    color: #ffffff;
+    align-items: space-evenly;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand{
+    padding-top: 1rem;
+    padding-bottom: 0.5 rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i{
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+.f-info-socials i:hover{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color: #ffffff;
+    padding-bottom: 1rem;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+/* font-style: italic;
+color: #EFB74D!important;
+font-family: 'PLAYFAIR DISPLAY'; */

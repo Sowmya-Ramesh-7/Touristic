@@ -1,0 +1,29 @@
+<% layout("/layouts/boilerplate") %>
+<head>
+    <title>Touristic</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Places to Visit</h3>
+        <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-md-3">
+            <%  for(let listing of allListings){ %>
+            <a href="/listings/<%=listing.id%>" class="listing-link">
+                <div class="card col-xxs-1 col-xs-1" >
+                    <img src="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                    <p class="card-text">
+                        <b><%= listing.title %><br/></b>
+                        Approx. <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %> / Day<br/>
+                    </p>
+
+                    </div>
+                </div>
+            </a>
+            <% } %>
+        </div>
+        
+    </div>
+    
+      
+</body>
