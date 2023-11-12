@@ -2,6 +2,7 @@ body{
     font-family: Montserrat,sans-serif;
     overflow-x: hidden;
     display: flex;
+    background-color: rgb(250, 250, 250);
     flex-direction: column;
     min-height: 100vh;
 }
@@ -20,13 +21,33 @@ body{
     font-weight: 400;
 }
 
+.tag{
+    color:#222222;
+    font-weight: 300;
+    border: 0.02rem solid #c1c1c1;
+    border-radius: 1rem;
+    background-color: #e1e1ec9b;
+    padding: 0.5rem 1rem;
+}
+
 .search-btn{
     color: #191970;
 }
 .search-btn:hover{
     background-color: #191970;
 }
-/* cards */
+.button{
+    background-color:#191970 !important;
+    color:#ffffff !important;
+}
+.button:hover{
+    background-color:#14145a !important;
+    color:#ffffff !important;
+}
+.btns{
+    display: flex;
+}
+/* Index page -cards */
 .card{
     border: none !important;
     margin-bottom: 2rem;
@@ -48,12 +69,29 @@ body{
     text-decoration: none;
 }
 /* card effect */
-.card-img-overlay{
+.card-effect{
     opacity: 0;
 }
-.card-img-overlay:hover{
+.card-effect:hover{
     opacity: 0.2;
     background-color: #ffffff;
+}
+
+/*Show page*/
+
+.show-title{
+    color: #ffffff;
+    letter-spacing: 0.5rem;
+    text-shadow: rgb(0 0 0 / 90%) 0px 8px 8px !important;
+    font-weight: 800;
+    font-size: 4rem !important;
+}
+
+.show-card{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: #000080;
 }
 /* footer */
 .f-info{

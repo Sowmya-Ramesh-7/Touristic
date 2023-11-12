@@ -3,39 +3,98 @@
     <title>Edit Listing</title>
 </head>
 <body>
-<form method="post" enctype="multipart/form-data" action="/listings/<%= listing.id %>?_method=PUT">
+<form method="post" enctype="multipart/form-data" action="/listings/<%= listing.id %>?_method=PUT" novalidate class="needs-validation">
     <h1 style="background-color:#191970;color:#ffffff;text-align:center;padding:1rem" class="mb-4">Edit Your Listing</h1>
     <div class="row">
         <div class="col-8 offset-2">
+            
             <div class="mb-4">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control">
+                <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control" required>
+                <div class="invalid-feedback">Title required</div>
             </div>
+            
             <div class="mb-4">
                 <label for="description" class="form-label">Your Description</label>
-                <textarea name="listing[description]" rows="3" class="form-control"><%= listing.description %></textarea>
+                <textarea name="listing[description]" rows="3" class="form-control" required><%= listing.description %></textarea>
+                <div class="invalid-feedback">Please enter a short description</div>
             </div>
             
             <div class="mb-4">
                 <label for="image" class="form-label">Upload an Image</label>
-                <input type="file" name="image" accept="image/jpeg, image/jpg, image/png" value="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="form-control">  
+                <input type="file" name="image" accept="image/jpeg, image/jpg, image/png" value="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="form-control" required>  
+                <div class="invalid-feedback">Please choose a valid image(jpg/png/jpeg) </div>
             </div>
+            
+            <div class="mb-4">
+                <label for="category" class="form-label">Category</label>
+                <select id="category" name="listing[category]" class="form-select" required>
+                    <option value="Places to Visit" <% if(listing.categorye==="Places to Visit") { %>selected <%}%>>
+                        Places to Visit
+                    </option>
+                    <option value="Place to Stay" <% if(listing.categorye==="Place to Stay") { %>selected <%}%>>
+                        Place to Stay
+                    </option>
+                    <option value="Things To Do" <% if(listing.categorye==="Things To Do") { %>selected <%}%>>
+                        Things To Do
+                    </option>
+                    <option value="Restuarants" <% if(listing.categorye==="Restuarants") { %>selected <%}%>>
+                        Restuarants
+                    </option>
+                </select>
+                <div class="invalid-feedback">Please select a valid category</div>
+            </div>  
+            
+            <div class="mb-4">
+                <label for="destType" class="form-label">Destination Type</label><br>
+                <select name="listing[destType]" id="destType" class="form-select" required>                   
+                    <option value="Adventure" <% if(listing.destType==="Adventure") { %>selected <%}%> >
+                        Adventure
+                    </option>
+                    <option value="Beaches" <% if(listing.destType==="Beaches") { %>selected <%}%>>
+                        Beaches
+                    </option>
+                    <option value="Nature" <% if(listing.destType==="Nature") { %>selected <%}%>>
+                        Nature
+                    </option>
+                    <option value="Culture and Heritage" <% if(listing.destType==="Culture and Heritage") { %>selected <%}%>>
+                        Culture and Heritage
+                    </option>
+                    <option value="Recreational" <% if(listing.destType==="Recreational") { %>selected <%}%>>
+                        Recreational
+                    </option>
+                    <option value="Wellness" <% if(listing.destType==="Wellness") { %>selected <%}%>>
+                        Wellness
+                    </option>
+                    <option value="Others" <% if(listing.destType==="Others") { %>selected <%}%>>
+                        Others
+                    </option>
+                </select>
+                <div class="invalid-feedback">Please select a valid destination type</div>
+            </div>
+            
             <div class="mb-4">
                 <label for="image" class="form-label">Approx. Price </label>
-                <input type="text" name="listing[price]" value="<%= listing.price %>" class="form-control">
+                <input type="text" name="listing[price]" value="<%= listing.price %>" class="form-control" required>
+                <div class="invalid-feedback">Please enter a valid price</div>
             </div>
+            
             <div class="mb-4">
                 <label for="location" class="form-label">Location</label>
-                <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control">
+                <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control" required>
+                <div class="invalid-feedback">Please enter a valid Location</div>
             </div>
         
             <div class="mb-4">
                 <label for="country" class="form-label">Country</label>
-                <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control">   
+                <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control" required>   
+                <div class="invalid-feedback">Please enter a valid Country name</div>
             </div>
+            
             <div class="mb-5">
-                <button style="background-color:#191970;color:#ffffff" class="btn btn-dark">EDIT</button>
+                <button class="button btn btn-dark">EDIT</button>
             </div>
+
         </div>
     </div>
 </form>
