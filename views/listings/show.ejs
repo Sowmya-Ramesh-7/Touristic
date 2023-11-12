@@ -1,28 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout("/layouts/boilerplate") %>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= listing.title %></title>
 </head>
 <body>
-    <h1><%= listing.title %></h1>
-    <h1><%= listing.title %></h1>
-    <p><%= listing.description %></p>
-    
-    <!-- Display the image 
-    <img src="<%= listing.image.data %>" alt="<%= listing.title %>" />-->
-    
-    <img src="<%= listing.imageUrl %>" />
-    
-        <p>Price: <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %></p>
-    <p>Location: <%= listing.location %></p>
-    <p>Country: <%= listing.country %></p>
-
-    <a href="/listings/<%= listing._id %>/edit">Edit Your Listing</a><br/><br/><br/>
-
-    <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button>Delete Listing</button>
-    </form>
-</body>
-</html>
+    <div class="show-card mb-4">
+        <div class="show-title"><%= listing.title.toUpperCase() %></div>
+    </div>
+    <div class="card mb-3 col-8 offset-2">
+        <div class="card-body">
+            <p class="card-text"><%= listing.description%> </p>
+            <p class="card-text">
+                <small class="text-muted"> <span class="tag"><%= listing.destType %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">Location: <%= listing.location %></span>&nbsp;&nbsp;&nbsp;&nbsp;</small>
+            </p>
+        </div>
+        <img src="<%= listing.imageUrl %>" class="card-img-top" alt="Image of <%= listing.title %>">
+        <div class="card-body">
+          <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+          <p>Approx. Price: <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %> / day</p>
+          <p>Category: <%= listing.category %></p>
+          <p>Location: <%= listing.location %></p>
+          <p>Country: <%= listing.country %></p>
+          <div class="btns">
+            <a href="/listings/<%= listing._id %>/edit" class="button btn">Edit Your Listing</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
+                <button class="btn btn-danger">Delete Your Listing</button>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </body>

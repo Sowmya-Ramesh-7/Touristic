@@ -1,41 +1,80 @@
 <% layout("/layouts/boilerplate") %>
 <head>
     <title>Create New Listing</title>
-</head>
+</head> 
 <body>
-<form method="post" enctype="multipart/form-data" action="/listings">
+<form method="post" enctype="multipart/form-data" action="/listings" novalidate class="needs-validation">
     <h1 style="background-color:#191970;color:#ffffff;text-align:center;padding:1rem" class="mb-4">Create New Listing</h1>
     <div class="row">
         <div class="col-8 offset-2">
+            
             <div class="mb-4">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" name="listing[title]" placeholder="Title" class="form-control">
-            </div>
-            <div class="mb-4">
-                <label for="description" class="form-label">Enter the Description</label>
-                <textarea name="listing[description]" rows="3" placeholder="About the place" class="form-control"></textarea>
+                <label for="title"  class="form-label">Title</label>
+                <input type="text" id="title" name="listing[title]" placeholder="Title" class="form-control" required />
+                <div class="invalid-feedback">Title required</div>
             </div>
             
             <div class="mb-4">
-                <label for="image" class="form-label">Upload an Image</label>
-                <input type="file" name="image" accept="image/jpeg, image/jpg, image/png" class="form-control">  
+                <label for="description" class="form-label">Enter the Description</label>
+                <textarea name="listing[description]" id="description" rows="3" placeholder="About the place" required class="form-control"></textarea>
+                <div class="invalid-feedback">Please enter a short description</div>
             </div>
+            
             <div class="mb-4">
-                <label for="image" class="form-label">Approx. Price </label>
-                <input type="text" name="listing[price]" placeholder="eg- '2000'" class="form-control">
+                <label for="image" class="form-label">Upload an Image</label><br/>
+                <input type="file" id="image" name="image" accept="image/jpeg, image/jpg, image/png" required class="form-control-file">  
+                <div class="invalid-feedback">Please choose a valid image(jpg/png/jpeg) </div>
             </div>
+            
+            <div class="mb-4">
+                <label for="category" class="form-label">Category</label>
+                <select id="category" name="listing[category]" class="form-select" required >
+                    <option value="">-- Select the Category --</option>
+                    <option value="Places to Visit">Places to Visit</option>
+                    <option value="Place to Stay">Place to Stay</option>
+                    <option value="Things To Do">Things To Do</option>
+                    <option value="Restuarants">Restuarants</option>
+                </select>
+                <div class="invalid-feedback">Please select a valid category</div>
+            </div>  
+            
+            <div class="mb-4">
+                <label for="destType" class="form-label">Destination Type</label><br>
+                <select name="listing[destType]" id="destType" class="form-select" required>                   
+                    <option value="">-- Select the Destination Type --</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Beaches">Beaches</option>
+                    <option value="Nature">Nature</option>
+                    <option value="Culture and Heritage">Culture and Heritage</option>
+                    <option value="Recreational">Recreational</option>
+                    <option value="Wellness">Wellness</option>
+                    <option value="Others">Others</option>
+                </select>
+                <div class="invalid-feedback">Please select a valid destination type</div>
+            </div>
+
+            <div class="mb-4">
+                <label for="price" class="form-label">Approx. Price </label>
+                <input type="text" id="price" name="listing[price]" placeholder="eg- '2000'" class="form-control" required>
+                <div class="invalid-feedback">Please enter a valid price</div>
+            </div>
+            
             <div class="mb-4">
                 <label for="location" class="form-label">Location</label>
-                <input type="text" name="listing[location]" placeholder="Village/Town/City" class="form-control">
+                <input type="text" id="location" name="listing[location]" placeholder="Village/Town/City" required class="form-control">
+                <div class="invalid-feedback">Please enter a valid Location</div>
             </div>
         
             <div class="mb-4">
                 <label for="country" class="form-label">Country</label>
-                <input type="text" name="listing[country]" placeholder="eg-'India'" class="form-control">   
+                <input type="text" id="country" name="listing[country]" placeholder="eg-'India'" class="form-control" required>   
+                <div class="invalid-feedback">Please enter a valid Country name</div>
             </div>
+            
             <div class="mb-5">
-                <button style="background-color:#191970;color:#ffffff" class="btn btn-dark">ADD</button>
+                <button class="button btn btn-dark">ADD</button>
             </div>
+       
         </div>
     </div>
 </form>
