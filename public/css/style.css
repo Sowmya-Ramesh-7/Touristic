@@ -131,6 +131,13 @@ body{
     text-decoration: underline;
 }
 
+.error{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
 /* font-style: italic;
 color: #EFB74D!important;
 font-family: 'PLAYFAIR DISPLAY'; */

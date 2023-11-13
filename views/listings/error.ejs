@@ -1,0 +1,21 @@
+<% layout("/layouts/boilerplate") %>
+<head>
+    <title><%=err.statusCode %> Error</title>
+</head>
+<body>
+    <br/><br/>
+    <div class="row error">
+        <div class="col error" >
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div class="mb-3">
+                    <h1>Uh... <%if(err.statusCode){ %><%=err.statusCode%> <%}else{%> <%=err._message %> <%}%>Error</h1><br/>
+                    <%=err.message %>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button onclick="{history.back()}">Try Again</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
