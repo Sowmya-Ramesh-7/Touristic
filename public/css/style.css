@@ -48,7 +48,7 @@ body{
     display: flex;
 }
 /* Index page -cards */
-.card{
+.listing-card{
     border: none !important;
     margin-bottom: 2rem;
     border-radius: 1rem !important

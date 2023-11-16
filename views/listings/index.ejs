@@ -4,11 +4,11 @@
 </head>
 <body>
     <div class="container">
-        <h3>Places to Visit</h3>
+        <%=success%>
         <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-md-3">
             <%  for(let listing of allListings){ %>
             <a href="/listings/<%=listing.id%>" class="listing-link">
-                <div class="card col-xxs-1 col-xs-1" >
+                <div class="card listing-card col-xxs-1 col-xs-1" >
                     <img src="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
                     <div class="card-img-overlay card-effect"></div>
                     <div class="card-body">
