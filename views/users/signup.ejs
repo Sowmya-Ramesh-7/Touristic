@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate") %>
+<head>
+    <title>Create New Listing</title>
+</head> 
+<body>
+<form method="post" action="/signup" novalidate class="needs-validation">
+    <h3 class="title mt-4 mb-5">SignUp to Tourstic</h3>
+    <div class="row">
+        <div class="col-4 offset-4">
+            
+            <div class="mb-4">
+                <label for="fullname"  class="form-label">Full Name</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your Name" class="form-control" required />
+                <div class="invalid-feedback">Name required</div>
+            </div>
+            <div class="mb-4">
+                <label for="username"  class="form-label">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" class="form-control" required />
+                <div class="invalid-feedback">Username required</div>
+            </div>
+            <div class="mb-4">
+                <label for="email"  class="form-label">Email</label>
+                <input type="email" id="email" name="email" placeholder="abc@gmail.com" class="form-control" required />
+                <div class="invalid-feedback">Please enter a valid email address</div>
+            </div>
+            <div class="mb-4">
+                <label for="password"  class="form-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter a Password" class="form-control" required />
+                <div class="invalid-feedback">Enter a strong password</div>
+            </div>
+            
+
+            <div style="text-align:center;" class="mb-5">
+                <button class="button btn btn-dark">SignUp</button>
+            </div>
+       
+        </div>
+    </div>
+</form>
+</body>

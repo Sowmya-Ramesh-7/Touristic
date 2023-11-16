@@ -47,6 +47,11 @@ body{
 .btns{
     display: flex;
 }
+
+/* Sign up */
+.title{
+    text-align: center;
+}
 /* Index page -cards */
 .listing-card{
     border: none !important;
