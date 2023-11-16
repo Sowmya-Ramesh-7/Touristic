@@ -1,28 +1,26 @@
 const fs = require('fs');
 const express=require("express");
 const app=express();
-const Listing=require("./models/listing.js");
+
+
 const mongoose=require("mongoose");
 const path=require("path");
 const methodOverride=require("method-override");
 const ejsMate=require("ejs-mate");
-const wrapAsync=require("./utils/wrapAsync.js");
 const ExpressError=require("./utils/ExpressError.js");
-const {listingSchema}=require("./schema.js");
+const flash=require("connect-flash")
+
+const listings=require("./routes/listing.js");
+const reviews=require("./routes/review.js");
 
 
 const multer  = require('multer');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './public/tmp/uploads')
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 100); //so tht filename is unique
-      return cb(null, file.fieldname + '-' + uniqueSuffix+path.extname(file.originalname))
-    }
-  })
-  
-  const upload = multer({ storage: storage })
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy=require('passport-local');
+const User=re
+
+
 
 app.engine("ejs",ejsMate);
 app.use(methodOverride("_method"));
@@ -44,74 +42,32 @@ async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/touristic");
 }
 
-const validateListing=(req,res,next)=>{
-    let {error}=listingSchema.validate(req.body);
-    if(error){
-        throw new ExpressError(400,error);
+//sessions
+const sessionOptions={
+    secret:"mysupersecret",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*1000*60*60*24,
+        httpOnly:true
     }
 }
+app.use(session(sessionOptions));
+app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
 
-//index route
-app.get("/listings",wrapAsync(async (req,res)=>{
-    const allListings=await Listing.find({});
-    res.render("./listings/index.ejs",{allListings});
-}));
-
-//new & create route
-app.get("/listings/new", (req,res)=>{
-    res.render("./listings/new.ejs");
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
 })
+app.use("/listings",listings);
+app.use("/listings/:id/reviews",reviews);
 
-
-app.post("/listings",upload.single('image'),validateListing,wrapAsync(async (req,res)=>{
-    console.log(req.body);
-    console.log(req.file);
-    let listing=req.body.listing;
-    listing['image']={
-        'data':fs.readFileSync(path.join(__dirname + '/public/tmp/uploads/' + req.file.filename)),
-        'contentType':req.file.mimetype
-    }
-    const newLisitng= new Listing({...listing});
-    await newLisitng.save();
-    //delete the tempory file
-    fs.unlink(req.file.path,(err) => {
-        if (err) throw err;
-        console.log(`Deleted file ${req.file.path}`);
-      });
-    res.redirect("/listings");
-}));
-
-//show route
-app.get("/listings/:id", wrapAsync(async (req,res)=>{
-    let {id}=req.params;
-    const listing=await Listing.findById(id);
-    listing['imageUrl']="data:image/"+listing.image.contentType+";base64,"+listing.image.data.toString('base64');
-    res.render("./listings/show.ejs",{listing});
-}));
-
-
-//edit and update route
-app.get("/listings/:id/edit", wrapAsync(async(req,res)=>{
-    let {id}=req.params;
-    const listing=await Listing.findById(id);
-    res.render("./listings/edit.ejs",{listing});
-}));
-app.put("/listings/:id",validateListing, wrapAsync(async (req,res)=>{
-    let {id}=req.params;
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send Valid Data to create a new Listing");
-    }
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect("/listings")
-}));
-
-//delete
-app.delete("/listings/:id",wrapAsync(async (req,res)=>{
-    let {id}=req.params;
-    await Listing.findByIdAndDelete(id);
-    res.redirect("/listings")
-}));
 
 //throwing new express error
 app.all("*",(req,res,next)=>{
@@ -121,6 +77,7 @@ app.all("*",(req,res,next)=>{
 //error handling middleware
 app.use((err,req,res,next)=>{
     let {statusCode=500,message="Something went wrong"}=err;
+    console.log(err)
     res.status(statusCode).render("./listings/error.ejs",{err});
 });
 
