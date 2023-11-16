@@ -17,3 +17,5 @@
         }, false)
       })
   })()
+
+  $(".alert").alert('close')
