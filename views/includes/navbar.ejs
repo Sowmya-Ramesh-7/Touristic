@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg border-bottom sticky-top" style="background-color: #ffffff;">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="/assets/logo.png" alt="Touristic" width="120" height="60">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
@@ -43,11 +43,21 @@
             <li><a class="dropdown-item" href="#">Others</a></li>
           </ul>
         </li>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%if(!currUser){%>
+            <a class="nav-link" href="/login"><i class="fa-solid fa-circle-user"></i> Login/Signup</a>
+            <%}else{%>
+            <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <% } %>
+          </li>
+        </ul>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-primary search-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
       </form>
+      
     </div>
   </div>
 </nav>

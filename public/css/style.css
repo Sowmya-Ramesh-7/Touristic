@@ -14,7 +14,13 @@ body{
 .navbar{
     height: 5rem;
 }
-
+.navbar-collapse {
+    position: relative; 
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+    
+  }
 .nav-link{
     font-size: 1.05rem;
     color:#222222 !important;
