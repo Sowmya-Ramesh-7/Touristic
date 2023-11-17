@@ -34,16 +34,14 @@ router
 router.get("/new", isLoggedIn, listingController.renderCreateForm)
 
 
-
-//show route
-router.get("/:id", wrapAsync(listingController.showListings));
+router
+  .route("/:id")
+  .get( wrapAsync(listingController.showListings))
+  .put(isLoggedIn, isOwner,validateListing, wrapAsync(listingController.updateListings))
+  .delete(isLoggedIn, isOwner, wrapAsync(listingController.destroyListings));
 
 
 //edit and update route
 router.get("/:id/edit",isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
-router.put("/:id",isLoggedIn, isOwner,validateListing, wrapAsync(listingController.updateListings));
-
-//delete
-router.delete("/:id",isLoggedIn, isOwner, wrapAsync(listingController.destroyListings));
 
 module.exports=router;
