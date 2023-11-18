@@ -149,6 +149,18 @@ body{
     flex-direction: column;
 
 }
-/* font-style: italic;
-color: #EFB74D!important;
-font-family: 'PLAYFAIR DISPLAY'; */
+
+@media (max-width: 550px) {
+    .show-title{
+        letter-spacing: 0.2rem;
+        font-weight: 600;
+        font-size: 2rem !important;
+    }
+    .review-body-sm{
+        font-size: 0.7rem !important;
+    }
+    .review-name-sm{
+        font-size: 0.8rem !important;
+    }
+
+}

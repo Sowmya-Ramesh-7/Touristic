@@ -6,7 +6,7 @@
   <div class="show-card mb-4">
     <div class="show-title"><%= listing.title.toUpperCase() %></div>
   </div>
-  <div class="card listing-card mb-3 col-8 offset-2">
+  <div class="card listing-card mb-3 col-lg-8 offset-lg-2">
     <div class="card-body">
         <p class="card-text"><%= listing.description%> </p>
         <p class="card-text">
@@ -31,15 +31,21 @@
       <% } %>
     </div>
   </div>
-  <div class="card listing-card card-body mb-3 pt-4 col-8 offset-2">
+  <div class="card listing-card card-body mb-3 pt-4 col-lg-8 offset-lg-2">
     <form method="post" action="/listings/<%=listing._id%>/reviews/" novalidate class="needs-validation">
-      <h4>Leave a Review</h4><hr/>
-      <div class="mb-4 col-6">
-        <label for="rating"  class="form-label">Rating</label>
-        <input type="range" id="rating" name="review[rating]" min="1" max="5" class="form-range"  />
+      <h4 id="view">Leave a Review</h4><hr/>
+      <div class="rating mb-4 col-lg-6">
+        <label for="rating" class="form-label"> &nbsp;&nbsp;&nbsp;&nbsp;Rating</label><br/>&nbsp;
+        <ul class="rate-area" id="rating">
+          <input type="radio" id="5-star" name="review[rating]" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+          <input type="radio" id="4-star" name="review[rating]" value="4" /><label for="4-star" title="Good">4 stars</label>
+          <input type="radio" id="3-star" name="review[rating]" value="3" /><label for="3-star" title="Average">3 stars</label>
+          <input type="radio" id="2-star" name="review[rating]" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+          <input type="radio" id="1-star" name="review[rating]" value="1" /><label for="1-star" title="Bad">1 star</label>
+        </ul>
       </div>
-      <div class="mb-4">
-        <label for="comment" class="form-label">Comment</label>
+      <div class="mb-4 ms-2"><br/>&nbsp;
+        <label for="comment" class="form-label"> Comment</label>
         <textarea name="review[comment]" id="comment" rows="3" placeholder="Tell us your Experience" class="form-control" required></textarea>
         <div class="invalid-feedback">Please add a comment</div>
       </div>
@@ -48,18 +54,27 @@
     
   </div>
  
-  <div class="row col-8 mt-5 mb-3 offset-2">
+  <div class="row col-lg-8 mt-5 mb-3 offset-lg-2">
     <h4>All Reviews</h4>
     <hr/>
     <% for(let review of listing["reviews"]){ %>
-      <div class="card col-5 mb-3 mt-3 ms-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= review.author.username %></h5>
-          <p class="card-text"><%=review.comment%></p>
-          <small class="text-muted"><p class="card-text"><%=review.rating%> stars</p></small>
+      <div class="card col-lg-5 mb-3 mt-3 ms-3">
+        <div class="card-body review-body-sm">
+          <h5 class="card-title  review-name-sm"><%= review.author.username %></h5>
+          <div class="card-text" class="mb-4">
+              <ul class="result rate-area card-text" id="rating">
+                <% for(let i = 1; i <= 5; i++){ %>
+                  <input type="radio" id="<%=i%>-star" <%= i <= review.rating ? 'checked' : '' %> disabled/>
+                  <label for="<%=i%>-star"><%=i%> stars</label>
+                <% } %>
+              </ul><br/>&nbsp;
+          </div>
+          <p class="card-text"><br/><%=review.comment%></p>
           <% if(currUser && currUser._id.equals(review.author._id)){ %>
-          <form method="post" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
-            <button class="btn mt-3 btn-danger">Delete</button>
+           <form method="post" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
+            <div class="card-text"><br/>
+              <button class="btn btn-danger">Delete</button>
+            </div>
           </form>
           <%}%>
         </div>
