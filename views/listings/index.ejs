@@ -8,7 +8,7 @@
             <%  for(let listing of allListings){ %>
             <a href="/listings/<%=listing.id%>" class="listing-link">
                 <div class="card listing-card col-xxs-1 col-xs-1" >
-                    <img src="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
+                    <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
                     <div class="card-img-overlay card-effect"></div>
                     <div class="card-body">
                     <p class="card-text">

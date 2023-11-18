@@ -14,7 +14,7 @@
         </p><br/>
         <p class="card-text"><i>Posted by: <%= listing.owner.username%> </i></p>
     </div>
-    <img src="<%= listing.imageUrl %>" class="card-img-top" alt="Image of <%= listing.title %>">
+    <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>">
     <div class="card-body">
       <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
       <p>Approx. Price: <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %> / day</p>

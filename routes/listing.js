@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV!="production"){
+  require("dotenv").config();
+}
+
+
 const express=require("express");
 const router=express.Router({mergeParams:true});
 
@@ -12,27 +17,16 @@ const listingController=require("../controllers/listing.js")
 
 
 const multer  = require('multer');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './routes/uploads')
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 100); //so tht filename is unique
-      return cb(null, file.fieldname + '-' + uniqueSuffix+path.extname(file.originalname))
-    }
-  })
-  
-  const upload = multer({ storage: storage })
+const {storage}=require("../cloudConfig.js")
+const upload = multer({ storage })
 
 router
   .route("/")
   .get(wrapAsync(listingController.index))
-  .post(upload.single('image'),validateListing,wrapAsync(listingController.createListings));
-
+  .post(isLoggedIn,upload.single('listing[image]'),validateListing,wrapAsync(listingController.createListings));
 
 //new 
 router.get("/new", isLoggedIn, listingController.renderCreateForm)
-
 
 router
   .route("/:id")

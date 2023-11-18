@@ -9,8 +9,8 @@ const listingSchema= new Schema({
     },
     description:String,
     image: { 
-        data: Buffer, 
-        contentType: String 
+        url:String ,
+        filename: String 
     },
     category:String,
     destType:String,

@@ -29,12 +29,10 @@ module.exports.renderLoginForm=(req,res)=>{
 
 module.exports.userLogin=async (req,res)=>{
     req.flash("success","You are logged in !!!");
-    console.log(res.locals.redirectUrl);
     if(res.locals.redirectUrl){
         redirectUrl=res.locals.redirectUrl
         pos=redirectUrl.search("/reviews/")
         if(pos!==-1){
-            console.log(pos)
             redirectUrl=redirectUrl.slice(0, pos+1);
         }
         return res.redirect(redirectUrl); 
