@@ -19,26 +19,30 @@
                 <textarea name="listing[description]" rows="3" class="form-control" required><%= listing.description %></textarea>
                 <div class="invalid-feedback">Please enter a short description</div>
             </div>
+            <div class="mb-4">
+                <p>Previous Image Preview</p>
+                <img src="<%=editedUrl%>" class="card" alt="Oringinal Image"/>
+            </div>
             
             <div class="mb-4">
-                <label for="image" class="form-label">Upload an Image</label>
-                <input type="file" name="image" accept="image/jpeg, image/jpg, image/png" value="data:image/<%=listing.image.contentType%>;base64,<%=listing.image.data.toString('base64')%>" class="form-control" required>  
+                <label for="image" class="form-label">Update the Image</label>
+                <input type="file" name="listing[image]" accept="image/jpeg, image/jpg, image/png"  class="form-control">  
                 <div class="invalid-feedback">Please choose a valid image(jpg/png/jpeg) </div>
             </div>
             
             <div class="mb-4">
                 <label for="category" class="form-label">Category</label>
                 <select id="category" name="listing[category]" class="form-select" required>
-                    <option value="Places to Visit" <% if(listing.categorye==="Places to Visit") { %>selected <%}%>>
+                    <option value="Places to Visit" <% if(listing.category==="Places to Visit") { %>selected <%}%>>
                         Places to Visit
                     </option>
-                    <option value="Place to Stay" <% if(listing.categorye==="Place to Stay") { %>selected <%}%>>
+                    <option value="Place to Stay" <% if(listing.category==="Place to Stay") { %>selected <%}%>>
                         Place to Stay
                     </option>
-                    <option value="Things To Do" <% if(listing.categorye==="Things To Do") { %>selected <%}%>>
+                    <option value="Things To Do" <% if(listing.category==="Things To Do") { %>selected <%}%>>
                         Things To Do
                     </option>
-                    <option value="Restuarants" <% if(listing.categorye==="Restuarants") { %>selected <%}%>>
+                    <option value="Restuarants" <% if(listing.category==="Restuarants") { %>selected <%}%>>
                         Restuarants
                     </option>
                 </select>
@@ -74,7 +78,7 @@
             </div>
             
             <div class="mb-4">
-                <label for="image" class="form-label">Approx. Price </label>
+                <label for="price" class="form-label">Approx. Price </label>
                 <input type="text" name="listing[price]" value="<%= listing.price %>" class="form-control" required>
                 <div class="invalid-feedback">Please enter a valid price</div>
             </div>

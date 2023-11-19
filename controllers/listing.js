@@ -39,20 +39,26 @@ module.exports.showListings=async (req,res)=>{
 module.exports.renderEditForm=async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
-    res.render("./listings/edit.ejs",{listing});
-}
-
-module.exports.updateListings=async (req,res)=>{
-    let {id}=req.params;
     if(!listing){
         req.flash("error","Listing does not exists ");
         res.redirect("/listings");
     }
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send Valid Data to create a new Listing");
-    }
+    let url=listing.image.url;
+    let editedUrl=url.replace("/upload","/upload/w_250")
+    res.render("./listings/edit.ejs",{listing,editedUrl});
+}
+
+module.exports.updateListings=async (req,res)=>{
+    let {id}=req.params;
+    let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
     
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    if(typeof req.file !== "undefined"){
+        let url=req.file.path;
+        let filename=req.file.filename;
+        listing['image']={url,filename};
+        await listing.save();
+    }
+
     req.flash("success","Your Listing updated");
     res.redirect("/listings");
 }
