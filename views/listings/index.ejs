@@ -1,30 +1,69 @@
 <% layout("/layouts/boilerplate") %>
 <head>
-    <title>Touristic -All Listings</title>
+    <title>Touristic - Home</title>
+    <link rel="stylesheet" type="text/css" href="/css/filter.css"/>
 </head>
 <body>
+    
     <div class="container">
+        <div class="heading mb-3">
+            <div class="main-heading">
+                Trending Now
+            </div>
+            <div class="sub-heading">
+                Top Rated Listings for you
+            </div>
+        </div>
+        <br>
+
         <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-md-3">
-            <%  for(let listing of allListings){ %>
-            <a href="/listings/<%=listing.id%>" class="listing-link">
-                <div class="card listing-card col-xxs-1 col-xs-1" >
+            <%  for(let i=0;i<8;i++){
+                listing=allListings[i] %>
+                <div class="card listing-card col-xxs-1 col-xs-1">
                     <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
-                    <div class="card-img-overlay card-effect"></div>
                     <div class="card-body">
                     <p class="card-text">
                         <b><%= listing.title %></b><br/>
                         <small class="text-muted">
                             Approx. Price: <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %>/Day<br/>
                             Location: <%= listing.location %>
-                        </small><br/>
+                            <br/><b><i class="card-text">Posted by @<%= listing.owner.username %></i></b><br/> 
+                        </small>
                     </p>
-                    
-                    <button class="button btn btn-dark">View Details </button>
-
+                    <a href="/listings/<%=listing.id%>" class="button btn btn-dark listing-link">View Details</a>
                     </div>
                 </div>
-            </a>
             <% } %>
         </div>
     </div>
-</body>
+    <hr>
+    <%- include("../includes/destType.ejs") %>
+
+    <div class="container">
+        <div class="heading mb-3">
+            <div class="main-heading">
+                Categories
+            </div>
+            <div class="sub-heading">
+                Search by categories
+            </div>
+        </div>
+        <br>
+        <div class="row row-cols-lg-2 row-cols-sm-1 row-cols-md-1">
+            <div class="cols category-card card">
+                <img src="https://res.cloudinary.com/dn8uqbszo/image/upload/v1700579195/touristic_DEV/mkra51oy9wv8mgqsmmw6.jpg" alt="Things To Do">
+                <a href="/listings?category=Things To Do"><div class="card-img-overlay cat-overlay-effect main-heading">Things To Do</div></a>
+            </div>
+            <div class="cols category-card card">
+                <img src="https://res.cloudinary.com/dn8uqbszo/image/upload/v1700584430/touristic_DEV/zszdobq1olrpudybsdlq.jpg" alt="Restuarants">
+                <a href="/listings?category=Restuarants"><div class="card-img-overlay cat-overlay-effect main-heading">Restuarants</div></a>
+            </div>
+            <div class="cols category-card card">
+                <img src="https://res.cloudinary.com/dn8uqbszo/image/upload/v1700414138/touristic_DEV/tjcusak9mgdwbbulitkn.jpg" alt="Restuarants">
+                <a href="/listings?category=Places to Visit"><div class="card-img-overlay cat-overlay-effect main-heading">Places To Visit</div></a>
+            </div>
+            <div class="cols category-card card">
+                <img src="https://res.cloudinary.com/dn8uqbszo/image/upload/v1700584921/touristic_DEV/evwrqlumzezmtnxnjd5j.jpg" alt="Restuarants">
+                <a href="/listings?category=Place to Stay"><div class="card-img-overlay cat-overlay-effect main-heading">Place to Stay</div></a>
+            </div>
+        </div>
