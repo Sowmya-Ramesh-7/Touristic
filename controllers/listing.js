@@ -50,15 +50,12 @@ module.exports.showListings=async (req,res)=>{
         {path:"favorites",
         populate:{path:"listings"}
         });
-        console.log(user.favorites.listings);
         let fav =user.favorites.listings
         let favIds=[]
         for(let i in fav){
             favIds[i]=fav[i]._id;
         }
         favIds=favIds.map(objectId => objectId.toString());
-        console.log(id.toString().includes(favIds))
-        console.log(favIds)
         if(favIds.includes(id.toString())){
             listing['favorite']=true;
         }else{
