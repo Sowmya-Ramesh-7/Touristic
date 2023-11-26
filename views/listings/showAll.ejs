@@ -6,6 +6,9 @@
 <body>
     <div class="container">
         <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-md-3">
+            <% if(allListings.length===0){%>
+                <h3>No Results Found !! </h3>
+            <%} %>
             <%  for(let listing of allListings){ %>
                 <div class="card listing-card col-xxs-1col-xs-1">
                     <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
