@@ -12,8 +12,14 @@ const listingSchema= new Schema({
         url:String ,
         filename: String 
     },
-    category:String,
-    destType:String,
+    category:{
+        type:String,
+        enum:['Places to Visit','Place to Stay','Things To Do','Restuarants']
+    },
+    destType:{
+        type:String,
+        enum: ['Adventure', 'Beaches', 'Nature', 'Culture and Heritage', 'Recreational', 'Wellness', 'Others']
+    },
     price:Number,
     location:String,
     country:String,
@@ -23,6 +29,10 @@ const listingSchema= new Schema({
                 ref:"Review"
             }
         ],
+    avgRating:{
+        type:Number,
+        default:0
+    },
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User"

@@ -2,7 +2,6 @@ body{
     font-family: Montserrat,sans-serif;
     overflow-x: hidden;
     display: flex;
-    background-color: rgb(250, 250, 250);
     flex-direction: column;
     min-height: 100vh;
 }
@@ -79,6 +78,9 @@ body{
 .listing-link{
     text-decoration: none;
 }
+.listing-link:hover{
+    transform: scale(1.1);
+}
 /* card effect */
 .card-effect{
     opacity: 0;
@@ -149,12 +151,56 @@ body{
     flex-direction: column;
 
 }
+.heading{
+    text-align: center;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
 
-@media (max-width: 550px) {
+.main-heading{
+    color: #030303;
+    text-shadow: rgba(131, 128, 128, 0.9) 0px 1px 1px !important;
+    font-weight: 700;
+    font-size: 2rem !important;
+}
+
+.sub-heading{
+    font-style: italic;
+    color: #4dc9ef!important;
+    font-weight: 700;
+    font-family: 'PLAYFAIR DISPLAY';
+}
+
+/*Category card*/
+.category-card{
+    width:600 !important;  
+    border: none !important;
+    margin-bottom: 2rem;
+    border-radius: 1rem !important
+
+}
+.cat-overlay-effect{
+    color:#ffffff !important;
+    text-shadow: rgba(16, 16, 16, 0.9) 0px 8px 8px !important;
+    font-weight: 800;
+    font-size: 3rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+.cat-overlay-effect:hover {
+    color: #4dc9ef !important;
+    text-shadow: rgba(16, 16, 16, 0.9) 0px 3px 3px !important;
+    transform: scale(1.1);
+}
+
+@media (max-width:600px) {
     .show-title{
         letter-spacing: 0.2rem;
         font-weight: 600;
-        font-size: 2rem !important;
+        font-size: 1.75rem !important;
     }
     .review-body-sm{
         font-size: 0.7rem !important;
@@ -163,4 +209,14 @@ body{
         font-size: 0.8rem !important;
     }
 
+}
+
+
+
+@media (max-width:810px)and(min-width:601px)  {
+    .show-title{
+        letter-spacing: 0.2rem;
+        font-weight: 600;
+        font-size: 2.5rem !important;
+    }
 }

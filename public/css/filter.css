@@ -1,0 +1,24 @@
+ #filter{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+} 
+.filter> a{ 
+    text-decoration: none;
+    color: black;
+    width:10rem;
+}
+.filter>a>p{
+    font-size: 0.7rem;
+}
+.filter>a>div{
+    font-size: 3rem;
+}
+.filter{
+    text-align: center;
+    margin: 0.5rem 2.5rem 0 2.5rem;
+    opacity:0.7;
+}
+.filter:hover{
+    opacity:1
+} 
