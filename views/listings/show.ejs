@@ -10,9 +10,13 @@
   <div class="card listing-card mb-3 col-lg-8 offset-lg-2">
     <div class="card-body">
         <p class="card-text"><%= listing.description%> </p>
-        <p class="card-text">
-            <small class="text-muted"> <span class="tag"><%= listing.destType %></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">Location: <%= listing.location %></span>&nbsp;&nbsp;&nbsp;&nbsp;</small>
-        </p><br/>
+        <small class="text-muted"> 
+          <p class="card-text"><span class="tag"><%= listing.destType %></span></p>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <p class="card-text"><span class="tag">Location: <%= listing.location %></span></p>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        </small>
+        <br/>
         <p class="card-text"><i>Posted by: <%= listing.owner.username%> </i></p>
     </div>
     <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>">
@@ -50,7 +54,7 @@
 
 
   <!-- REVIEWS -->
-  
+
   <div class="card listing-card card-body mb-3 pt-4 col-lg-8 offset-lg-2">
     <form method="post" action="/listings/<%=listing._id%>/reviews/" novalidate class="needs-validation">
       <h4>Leave a Review</h4><hr/>
@@ -75,16 +79,17 @@
 
 
   <% if(listing['reviews'].length>0){%>
-  <div class="row col-lg-8 mt-5 mb-3 offset-lg-2">
+  <div class="card listing-card card-body mb-3 me-2 pt-4 col-lg-8 offset-lg-2">
+  <div class="row mb-3 ">
     <h4>All Reviews</h4>
     <p>Average Rating : <%=Math.round(listing.avgRating)%> stars</p>
     <hr/>
     <% for(let review of listing["reviews"]){ %>
-      <div class="card col-lg-5 mb-3 mt-3 ms-3">
+      <div class="card col-lg-5 mt-3  ms-2 me-2">
         <div class="card-body review-body-sm">
           <h5 class="card-title  review-name-sm"><%= review.author.username %></h5>
           <div class="card-text" class="mb-4">
-              <ul class="result rate-area card-text" id="rating">
+              <ul class="result rate-area no-scroll card-text" id="rating">
                 <% for(let i = 1; i <= 5; i++){ %>
                   <input type="radio" id="<%=i%>-star" <%= i <= review.rating ? 'checked' : '' %> disabled/>
                   <label for="<%=i%>-star"><%=i%> stars</label>

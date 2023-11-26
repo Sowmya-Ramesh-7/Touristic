@@ -208,7 +208,9 @@ body{
     .review-name-sm{
         font-size: 0.8rem !important;
     }
-
+    .cat-overlay-effect{
+        font-size: 1.75rem !important;
+    }
 }
 
 
