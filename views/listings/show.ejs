@@ -1,6 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 <head>
     <title><%= listing.title %></title>
+    
 </head>
 <body>
   <div class="show-card mb-4">
@@ -16,11 +17,11 @@
     </div>
     <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>">
     <div class="card-body">
-      <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
       <p>Approx. Price: <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %> / day</p>
       <p>Category: <%= listing.category %></p>
       <p>Location: <%= listing.location %></p>
       <p>Country: <%= listing.country %></p>
+
       <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
       <div class="btns">
         <a href="/listings/<%= listing._id %>/edit" class="button btn">Edit Your Listing</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -29,14 +30,33 @@
         </form>
       </div>
       <% } %>
+
+      <br/>
+      <a id="/favorites/<%=listing.id%>"></a>
+      <button class="btn btn-outline-danger fav no-scroll" id="<%=listing.id%>" 
+        style=<%= (listing['favorite']===false)? "display:inline;": "display:none;"%> 
+        onclick="addToFavorite('<%= listing._id %>',`<%= currUser ? currUser._id : '' %>`)" >
+          Add to Favorites
+      </button> 
+
+      <button class="btn btn-outline-danger removefav no-scroll" 
+        id="del-<%=listing.id%>" 
+        style=<%= (listing['favorite']===true)? "display:inline;": "display:none;"%> 
+        onclick="removeFavorite('<%= listing._id %>',`<%= currUser ? currUser._id : '' %>`) " >
+        Remove Favorite
+      </button> 
     </div>
   </div>
+
+
+  <!-- REVIEWS -->
+  
   <div class="card listing-card card-body mb-3 pt-4 col-lg-8 offset-lg-2">
     <form method="post" action="/listings/<%=listing._id%>/reviews/" novalidate class="needs-validation">
-      <h4 id="view">Leave a Review</h4><hr/>
+      <h4>Leave a Review</h4><hr/>
       <div class="rating mb-4 col-lg-6">
         <label for="rating" class="form-label"> &nbsp;&nbsp;&nbsp;&nbsp;Rating</label><br/>&nbsp;
-        <ul class="rate-area" id="rating">
+        <ul class="rate-area no-scroll" id="rating">
           <input type="radio" id="5-star" name="review[rating]" value="5" /><label for="5-star" title="Amazing">5 stars</label>
           <input type="radio" id="4-star" name="review[rating]" value="4" /><label for="4-star" title="Good">4 stars</label>
           <input type="radio" id="3-star" name="review[rating]" value="3" /><label for="3-star" title="Average">3 stars</label>
@@ -51,11 +71,13 @@
       </div>
       <button class="button btn btn-outline-primary">Submit</button>
     </form>
-    
   </div>
- 
+
+
+  <% if(listing['reviews'].length>0){%>
   <div class="row col-lg-8 mt-5 mb-3 offset-lg-2">
     <h4>All Reviews</h4>
+    <p>Average Rating : <%=Math.round(listing.avgRating)%> stars</p>
     <hr/>
     <% for(let review of listing["reviews"]){ %>
       <div class="card col-lg-5 mb-3 mt-3 ms-3">
@@ -80,6 +102,7 @@
         </div>
       </div>
     <%}%>
-
   </div>
+  <%}%>
+  
 </body>

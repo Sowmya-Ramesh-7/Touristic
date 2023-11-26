@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg border-bottom sticky-top" style="background-color: #ffffff;">
+<nav class="navbar navbar-expand-lg border-bottom sticky-top mb-3" style="background-color: #ffffff;">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="/assets/logo.png" alt="Touristic" width="120" height="60">
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/home">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/listings">All Listings</a>
@@ -22,10 +22,10 @@
             Category
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Places to Visit</a></li>
-            <li><a class="dropdown-item" href="#">Place to Stay</a></li>
-            <li><a class="dropdown-item" href="#">Things To Do </a></li>
-            <li><a class="dropdown-item" href="#">Restuarants</a></li>
+            <li><a class="dropdown-item" href="/listings?category=Places to Visit">Places to Visit</a></li>
+            <li><a class="dropdown-item" href="/listings?category=Place to Stay">Place to Stay</a></li>
+            <li><a class="dropdown-item" href="/listings?category=Things To Do">Things To Do </a></li>
+            <li><a class="dropdown-item" href="/listings?category=Restuarants">Restuarants</a></li>
             
           </ul>
         </li>
@@ -43,21 +43,25 @@
             <li><a class="dropdown-item" href="#">Others</a></li>
           </ul>
         </li>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <%if(!currUser){%>
-            <a class="nav-link" href="/login"><i class="fa-solid fa-circle-user"></i> Login/Signup</a>
-            <%}else{%>
-            <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-            <% } %>
-          </li>
-        </ul>
+        
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary search-btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </form>
       
+      
+      <ul class="d-flex navbar-nav">
+          <%if(!currUser){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><i class="fa-solid fa-circle-user"></i> Login/Signup</a>
+          </li>
+          <%}else{%>
+          <li class="nav-item">
+          <a class="nav-link" href="/favorites"><i class="fa-solid fa-heart"></i> My Favorites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          </li>
+          <% } %>
+      </ul>
     </div>
   </div>
 </nav>
+

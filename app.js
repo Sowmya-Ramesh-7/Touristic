@@ -15,6 +15,7 @@ const flash=require("connect-flash")
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");
 const userRouter=require("./routes/user.js");
+const favoriteRouter=require("./routes/favorite.js");
 
 
 const multer  = require('multer');
@@ -74,12 +75,15 @@ app.use((req,res,next)=>{
     next();
 })
 
+const wrapAsync=require("./utils/wrapAsync.js");
+const listingController=require("./controllers/listing.js")
 
-
+app.get("/home",wrapAsync(listingController.index));
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
-app.use("/",userRouter)
+app.use("/",userRouter);
+app.use("/favorites",favoriteRouter);
 
 
 //throwing new express error
