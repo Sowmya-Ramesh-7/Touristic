@@ -101,7 +101,7 @@ app.use((req,res,next)=>{
 const wrapAsync=require("./utils/wrapAsync.js");
 const listingController=require("./controllers/listing.js")
 
-app.get("/home",wrapAsync(listingController.index));
+app.get("/",wrapAsync(listingController.index));
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
