@@ -30,8 +30,12 @@ module.exports.renderLoginForm=(req,res)=>{
 module.exports.userLogin=async (req,res)=>{
     req.flash("success","You are logged in !!!");
     if(res.locals.redirectUrl){
-        redirectUrl=res.locals.redirectUrl
-        pos=redirectUrl.search("/reviews/")
+        let redirectUrl=res.locals.redirectUrl
+        let pos=redirectUrl.search("/reviews/")
+        let fav=redirectUrl.search("/favorites/")
+        if(fav!==-1){
+            return res.redirect("/listings");
+        }
         if(pos!==-1){
             redirectUrl=redirectUrl.slice(0, pos+1);
         }
@@ -49,4 +53,12 @@ module.exports.userLogout=(req,res,next)=>{
         req.flash("success","You are logged out !");
         res.redirect("/listings")
     })
+}
+
+module.exports.renderPrivacy=(req,res)=>{
+    res.render("./users/privacy.ejs");
+}
+
+module.exports.renderTerms=(req,res)=>{
+    res.render("./users/terms.ejs");
 }
