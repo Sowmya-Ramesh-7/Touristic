@@ -1,10 +1,20 @@
+const favorite = require("../models/favorite.js");
 const Listing=require("../models/listing.js");
+const User=require("../models/user.js");
 const ExpressError=require("../utils/ExpressError.js");
+const cloudinary = require('cloudinary').v2;
+
+
 
 
 module.exports.index=async (req,res)=>{
-    const allListings=await Listing.find({});
-    res.render("./listings/index.ejs",{allListings});
+    const allListings=await Listing.find(req.query).sort({avgRating:-1}).populate("owner");
+    return res.render("./listings/index.ejs",{allListings});
+}
+
+module.exports.allListings=async (req,res)=>{
+        const allListings=await Listing.find(req.query).populate("owner");
+        return res.render("./listings/showAll.ejs",{allListings});
 }
 
 module.exports.renderCreateForm=(req,res)=>{
@@ -23,6 +33,7 @@ module.exports.createListings=async (req,res)=>{
     res.redirect("/listings");
 }
 
+
 module.exports.showListings=async (req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id).populate(
@@ -32,6 +43,27 @@ module.exports.showListings=async (req,res)=>{
     if(!listing){
         req.flash("error","Listing does not exists ");
         res.redirect("/listings");
+    }
+    listing['favorite']=false;
+    if("user" in req){
+       let user= await User.findById(req.user._id).populate(
+        {path:"favorites",
+        populate:{path:"listings"}
+        });
+        console.log(user.favorites.listings);
+        let fav =user.favorites.listings
+        let favIds=[]
+        for(let i in fav){
+            favIds[i]=fav[i]._id;
+        }
+        favIds=favIds.map(objectId => objectId.toString());
+        console.log(id.toString().includes(favIds))
+        console.log(favIds)
+        if(favIds.includes(id.toString())){
+            listing['favorite']=true;
+        }else{
+            listing['favorite']=false;
+        }  
     }
     res.render("./listings/show.ejs",{listing});
 }
