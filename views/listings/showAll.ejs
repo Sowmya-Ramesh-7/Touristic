@@ -1,0 +1,30 @@
+<% layout("/layouts/boilerplate") %>
+<head>
+    <title>Touristic</title>
+    <link rel="stylesheet" type="text/css" href="/css/filter.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-md-3">
+            <%  for(let listing of allListings){ %>
+                <div class="card listing-card col-xxs-1col-xs-1">
+                    <img src="<%= listing.image.url%>" class="card-img-top" alt="Image of <%= listing.title %>" style="height:18rem">
+
+                    <div class="card-body">
+                    <p class="card-text">
+                        <b><%= listing.title %></b><br/>
+                        <small class="text-muted">
+                            Approx. Price: <%= listing.price.toLocaleString("en-IN",{ style: 'currency', currency: 'INR' }) %>/Day<br/>
+                            Location: <%= listing.location %>
+                            <br/><b><i class="card-text">Posted by @<%= listing.owner.username %></i></b><br/> 
+                        </small>
+                    </p>
+                    <a href="/listings/<%=listing.id%>" class="button btn btn-dark listing-link">View Details</a> 
+                      
+                </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+</body>
