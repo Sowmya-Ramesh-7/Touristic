@@ -1,6 +1,6 @@
 # Touristic
 
-Touristic is the Full stack web development project using the following technologies:
+Touristic is a Full Stack Web Development project that aims to provide a comprehensive platform for travel enthusiasts to discover, share, and explore the best places around the world.
 
     Frontend -
         HTML
